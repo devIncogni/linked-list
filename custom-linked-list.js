@@ -95,4 +95,21 @@ class LinkedList {
       currentNode = currentNode.next;
     }
   }
+
+  insertAt(value, index) {
+    if (index > this.size) {
+      this.append(value);
+      return;
+    }
+
+    let prevNode = this.at(index - 1);
+    let oldNode = prevNode.next;
+
+    prevNode.next = new Node(value, oldNode);
+  }
+
+  removeAt(index) {
+    let prevNode = this.at(index);
+    prevNode.next = prevNode.next.next;
+  }
 }
