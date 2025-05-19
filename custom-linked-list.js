@@ -113,3 +113,5 @@ class LinkedList {
     prevNode.next = prevNode.next.next;
   }
 }
+
+export default LinkedList;
