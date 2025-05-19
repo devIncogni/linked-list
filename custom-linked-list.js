@@ -102,6 +102,15 @@ class LinkedList {
 
   insertAt(value, index) {
     if (index > this.size) {
+      return;
+    }
+
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+
+    if (index === this.size - 1) {
       this.append(value);
       return;
     }
@@ -113,8 +122,18 @@ class LinkedList {
   }
 
   removeAt(index) {
+    if (index >= this.size) {
+      return;
+    }
+
+    if (index == 0) {
+      this.headNode = this.head.next;
+      return;
+    }
+
     let prevNode = this.at(index - 1);
-    prevNode.next = prevNode.next.next;
+
+    prevNode.next = index === this.size - 1 ? null : prevNode.next.next;
   }
 }
 
