@@ -31,7 +31,7 @@ class LinkedList {
   get size() {
     let size = 0;
     let currentNode = this.head;
-    while (currentNode.next !== null) {
+    while (currentNode !== null) {
       size += 1;
       currentNode = currentNode.next;
     }
@@ -47,14 +47,17 @@ class LinkedList {
   }
 
   at(index) {
-    let currentNode = this.head;
-    if (index > this.size) {
-      return null;
+    if (index >= this.size) {
+      return;
+    } else {
+      let currentNode = this.head;
+      let i = 0;
+      while (i < index) {
+        i += 1;
+        currentNode = currentNode.next;
+      }
+      return currentNode;
     }
-    for (let i = 0; i <= index; i++) {
-      currentNode = currentNode.next;
-    }
-    return currentNode;
   }
 
   pop() {
@@ -67,7 +70,7 @@ class LinkedList {
   }
 
   contains(value) {
-    for (let i = 0; i <= this.size; i++) {
+    for (let i = 0; i < this.size; i++) {
       if (String(this.at(i).value) === String(value)) {
         return true;
       }
@@ -76,10 +79,10 @@ class LinkedList {
   }
 
   find(value) {
-    for (let i = 0; i <= this.size; i++) {
+    for (let i = 0; i < this.size; i++) {
       if (String(this.at(i).value) === String(value)) return i;
-      return null;
     }
+    return null;
   }
 
   toString() {
@@ -90,10 +93,11 @@ class LinkedList {
     let currentNode = this.head;
     let listString = ``;
 
-    for (let i = 0; i <= this.size; i++) {
+    for (let i = 0; i < this.size; i++) {
       listString += `( ${currentNode.value} ) -> `;
       currentNode = currentNode.next;
     }
+    return listString + ` null`;
   }
 
   insertAt(value, index) {
@@ -109,7 +113,7 @@ class LinkedList {
   }
 
   removeAt(index) {
-    let prevNode = this.at(index);
+    let prevNode = this.at(index - 1);
     prevNode.next = prevNode.next.next;
   }
 }
