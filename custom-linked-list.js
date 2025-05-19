@@ -47,8 +47,8 @@ class LinkedList {
   }
 
   at(index) {
-    if (index >= this.size) {
-      return;
+    if (index >= this.size || index < 0) {
+      return null;
     } else {
       let currentNode = this.head;
       let i = 0;
@@ -67,6 +67,9 @@ class LinkedList {
     }
     this.at(listSize - 1).next = null;
     this.tailNode = this.at(listSize - 1);
+    if (listSize === 1) {
+      this.headNode = null;
+    }
   }
 
   contains(value) {
@@ -110,7 +113,7 @@ class LinkedList {
       return;
     }
 
-    if (index === this.size - 1) {
+    if (index === this.size) {
       this.append(value);
       return;
     }
@@ -134,6 +137,10 @@ class LinkedList {
     let prevNode = this.at(index - 1);
 
     prevNode.next = index === this.size - 1 ? null : prevNode.next.next;
+
+    if (index == this.size - 1) {
+      this.tailNode = prevNode;
+    }
   }
 }
 
